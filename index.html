@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StopWatch</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet"> 
+  <style>
+    :root {
+      --orange: #ffa600;
+      --grey:#f3f3f3;
+      --white: #fff;
+    }
+
+    body {
+      background-color: var(--orange);
+      text-align: center;
+      color: white;
+      font-family: 'Arial';
+      letter-spacing: 5px;
+    }
+
+    .main-title {
+      font-size: 3rem;
+      line-height: 1.5;
+    }
+
+    .sub-title {
+      font-size: 2.5rem;
+      line-height: 1.5;
+    }
+
+    .watch {
+      font-size: 4.5rem;
+      line-height: 3;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 1.5rem 3rem;
+      border-radius: 10px;
+      border: 2px solid var(--grey);
+      font-size: 2rem;
+      margin: 20px;
+      font-family: 'Arial';
+      background-color: var(--orange);
+      color: var(--grey);
+      letter-spacing: 5px;
+      transition: 300ms;
+    }
+
+    .btn:hover {
+      background-color: var(--grey);
+      border: none;
+      color: var(--orange);
+      cursor: pointer;
+    }
+
+  </style>
+</head>
+<body>
+  <h1 class="main-title">
+    STOPWATCH
+  </h1>
+  <h2 class="sub-title">Using Vanilla Javascript</h2>
+  <div id="my-watch-display" class="watch">
+    00:00
+  </div>
+  <div class="buttons">
+    <button class="btn start">Start</button>
+    <button class="btn stop">Stop</button>
+    <button class="btn reset">Reset</button>
+  </div>
+
+  <script>
+    // ALL VARIABLE DECLARATIONS
+    var counting = 0;
+    let start = document.querySelector(".start");
+    let stop = document.querySelector(".stop");
+    let reset = document.querySelector(".reset");
+    let counter = document.querySelector("#my-watch-display");
+    var seconds = 00;
+    var mseconds = 00;
+
+    // ACTUAL FUNCTION TO INCREMENT COUNTER
+    function count() {
+      if (counting === 1) {
+        // let seconds = Number(counter.innerHTML.slice(0, 3));
+        // let mseconds = Number(counter.innerHTML.slice(3, 5));
+        mseconds = mseconds + 1;
+        smseconds = mseconds;
+        sseconds = seconds;
+        if (mseconds === 100) {
+          mseconds = 0;
+          seconds = seconds + 1;
+          sseconds = seconds;
+        }
+        if (sseconds < 10) {
+          sseconds = "0" + sseconds;
+        }
+        if (smseconds < 10) {
+          smseconds = "0" + smseconds;
+        }
+        let time = sseconds + ":" + smseconds;
+        counter.innerHTML = time;
+        setTimeout(count, 0.1);
+      }
+    }
+
+    // FUNCTION TO START WATCH
+    function startCounting() {
+      counting = 1;
+      count();
+    }
+
+    // FUNCTION TO STOP COUNTING
+    function stopCounting() {
+      counting = 0;
+    }
+
+    // FUNTION TO RESET COUNTER
+    function resetCounter() {
+      counting = 0;
+      seconds = 00;
+      mseconds = 00;
+      counter.innerHTML = "00:00";
+    }
+
+    //ADDING EVENT LISTENERS TO ALL BUTTONS
+    start.addEventListener("click", startCounting);
+    stop.addEventListener("click", stopCounting);
+    reset.addEventListener("click", resetCounter);
+
+  </script>
+
+</body>
+</html>
